@@ -2,41 +2,49 @@
   <div class="canvas">
     <header>
         <img src="../assets/Logo.svg" alt="За стеклом">
-        <button @click='SendToServer' type="btn" class='btn' name="button">Формулировка идеи </button>
+        <button @click='SendToServer' type="btn" class='btn' name="button">Отправить идею</button>
     </header>
     <main>
-      <input type="text" v-model="name" class='title'  name="" value="" placeholder="Введите название вашей идеи">
+      <input type="text" v-model="name" class='Maintitle'  name="" value="" placeholder="Введите название вашей идеи">
       <div class="Product">
         <p>ВАШ ПРОДУКТ</p>
         <div class="Products">
           <div class='top'>
 
             <div class="left">
-              <!-- {{data.Products[0].BenefitsOfTheProduct}} -->
-              <div v-for='elem in data.Products[0].BenefitsOfTheProduct' class="block">
+              <p class="Description">В чем выгоды вашего продукта</p>
+              <div v-for='elem in data.Products[0].BenefitsOfTheProduct' class="block BenefitsOfTheProduct">
+                <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
                 <p>{{elem.name}}</p>
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
               </div>
-              <div @click='add("Products[0].BenefitsOfTheProduct")' class="add">+</div>
+              <div @click='add("Products[0].BenefitsOfTheProduct")' class="add BenefitsOfTheProductAdd">+</div>
             </div>
 
             <div class="right">
-              <div v-for='elem in data.Products[0].differences' class="block">
+              <p class="Description">Отличия от конкурентов</p>
+              <div v-for='elem in data.Products[0].differences' class="block differences">
+                <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
+
                 <p>{{elem.name}}</p>
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
 
               </div>
-              <div @click='add("Products[0].differences")' class="add">+</div>
+              <div @click='add("Products[0].differences")' class="add differencesAdd">+</div>
             </div>
         </div>
         <div class='notop'>
           <div class="center">
-            <div v-for='elem in data.Products[0].HowTheProductWillSolveTheProblem' class="blockC">
+            <p class="Description">Как продукт решает проблему</p>
+
+            <div v-for='elem in data.Products[0].HowTheProductWillSolveTheProblem' class="blockC HowTheProductWillSolveTheProblem">
+              <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
+
               <p>{{elem.name}}</p>
               <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
 
             </div>
-            <div @click='add("Products[0].HowTheProductWillSolveTheProblem")' class="addC">+</div>
+            <div @click='add("Products[0].HowTheProductWillSolveTheProblem")' class="addC HowTheProductWillSolveTheProblemAdd">+</div>
           </div>
         </div>
 
@@ -48,40 +56,53 @@
           <div class='top'>
 
             <div class="left">
-              <div v-for='elem in data.Clients[0].clientDescription' class="block">
+              <p class="Description">Описание клиента</p>
+
+              <div v-for='elem in data.Clients[0].clientDescription' class="block clientDescription">
+                <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
+
                 <p>{{elem.name}}</p>
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
 
               </div>
-              <div @click='add("Clients[0].clientDescription")' class="add">+</div>
+              <div @click='add("Clients[0].clientDescription")' class="add clientDescriptionAdd">+</div>
             </div>
 
             <div class="right">
-              <div v-for='elem in data.Clients[0].problemsFromTheClient' class="block">
+              <p class="Description">Какие проблемы возникают у клиента</p>
+              <div v-for='elem in data.Clients[0].problemsFromTheClient' class="block problemsFromTheClient">
+                <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
+
                 <p>{{elem.name}}</p>
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
 
               </div>
-              <div @click='add("Clients[0].problemsFromTheClient")' class="add">+</div>
+              <div @click='add("Clients[0].problemsFromTheClient")' class="add problemsFromTheClientAdd">+</div>
             </div>
           </div>
           <div class='notop'>
             <div class="left">
-              <div v-for='elem in data.Clients[0].whatProblemIsBeingSolvedNow' class="block">
+              <p class="Description">Как проблема решается сейчас</p>
+              <div v-for='elem in data.Clients[0].whatProblemIsBeingSolvedNow' class="block whatProblemIsBeingSolvedNow">
+                <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
+
                 <p>{{elem.name}}</p>
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
 
               </div>
-              <div @click='add("Clients[0].whatProblemIsBeingSolvedNow")' class="add">+</div>
+              <div @click='add("Clients[0].whatProblemIsBeingSolvedNow")' class="add whatProblemIsBeingSolvedNowAdd">+</div>
             </div>
 
             <div class="right">
-              <div v-for='elem in data.Clients[0].whatTasksTheClientSolves' class="block">
+              <p class="Description">Какие задачи решает клиент</p>
+              <div v-for='elem in data.Clients[0].whatTasksTheClientSolves' class="block whatTasksTheClientSolves">
+                <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
+
                 <p>{{elem.name}}</p>
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
 
               </div>
-              <div @click='add("Clients[0].whatTasksTheClientSolves")' class="add">+</div>
+              <div @click='add("Clients[0].whatTasksTheClientSolves")' class="add whatTasksTheClientSolvesAdd">+</div>
             </div>
           </div>
         </div>
@@ -94,11 +115,12 @@
       <p class='title'>{{title}}</p>
       <div class="template">
       <p>Тема стикера</p>
-      <input class='input1' type="text" name="ThemeSticker" v-model='ThemeSticker' value="">
+      <input class='input1' type="text" name="ThemeSticker" v-model='ThemeSticker' value="" maxlength="25">
       </div>
       <div class="template">
       <p>Описание</p>
-      <input class='input2'type="text" name="DescriptionSticker" v-model='DescriptionSticker' value="">
+      <!-- <input class='input2'type="text" name="DescriptionSticker" v-model='DescriptionSticker' value=""> -->
+      <textarea  class='input2'name="name" rows="8" cols="80" v-model='DescriptionSticker' ></textarea>
       </div>
       <button @click='SaveSticer' class="btn" name="button">Сохранить</button>
     </div>
@@ -108,6 +130,9 @@
 
 <script>
 import $ from "jquery"
+import swal from 'sweetalert';
+
+
 
 export default {
   name: 'canvas',
@@ -142,6 +167,15 @@ export default {
    },
 
   methods: {
+    del(elem){
+      console.log(elem);
+
+      arr.splice(elem.name);
+
+      this.data = arr;
+
+
+    },
     SendToServer(){
       let vm = this;
 
@@ -156,8 +190,17 @@ export default {
           },
           success: function(data) {
             console.log(data);
+            if (data == 'OK') {
+              swal("Отправленно", "Теперь мы можем увидеть вашу идею", "success");
+            } else {
+              swal("Ошибка сервека", "Пинайте vk.com/nik19ta ", "error");
+
+            }
           },
-          error: function(error) {}
+          error: function(error) {
+            swal("Ошибка сервека", "Пинайте vk.com/nik19ta ", "error");
+
+          }
       });
     },
     SaveSticer(){
@@ -289,17 +332,34 @@ main{
   opacity: 1;
   visibility: visible;
 }
+
+.blockC:hover .del {
+  opacity: 1;
+  visibility: visible;
+}
+.block:hover .del {
+  opacity: 1;
+  visibility: visible;
+}
+
 .right, .left {
   height: 100%;
+  position: relative;
+  padding-top: 30px!important;
+  overflow-x: hidden;
+  overflow-y: auto;
   width: 50%;
   padding: 10px;
-  overflow: auto;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
 }
 .center{
+  position: relative;
+  padding-top: 30px!important;
+  overflow-x: hidden;
+  overflow-y: auto;
   height: 100%;
   width: 100%;
 
@@ -309,18 +369,16 @@ main{
   flex-wrap: wrap;
 
   padding: 10px;
-
-  overflow: auto;
 }
 .add{
   width: 48%;
   height: 48%;
   margin: 1%;
-  border: 2px dashed #bae2e2;
+  /* border: 2px dashed #bae2e2; */
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #bae2e2;
+  /* color: #bae2e2; */
   font-size: 40px;
   cursor: pointer;
   opacity: 0;
@@ -331,11 +389,11 @@ main{
   width: 23.5%;
   height: 48%;
   margin: 0.7%;
-  border: 2px dashed #bae2e2;
+  /* border: 2px dashed #bae2e2; */
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #bae2e2;
+  /* color: #bae2e2; */
   font-size: 40px;
   cursor: pointer;
   opacity: 0;
@@ -346,16 +404,20 @@ main{
   width: 48%;
   height: 48%;
   margin: 1%;
-  background: #bae2e2;
-  font-size: 2vh!important;
-
+  position: relative;
+  cursor: pointer;
 }
+.block p, .blockC p {
+  font-size: 14px;
+  color: #444444;
+}
+
 .blockC{
   width: 23.5%;
   height: 48%;
   margin: 0.7%;
-  background: #bae2e2;
-  font-size: 2vh!important;
+  position: relative;
+  cursor: pointer;
 
 }
 .modal{
@@ -392,11 +454,20 @@ main{
   height: 30px;
   border-radius: 2px;
   border: solid 1px #80868d;
+  font-family: sans-serif;
+  color: #2c3e50;
+  font-size: 13px;
+  padding-left: 10px;
+  padding-right: 10px;
+
 }
 .input2{
   height: 80px;
+  vertical-align: top;
+  resize: none;
+
 }
-.title{
+.Maintitle{
   position: absolute;
   width: 300px;
   height: 40px;
@@ -406,5 +477,84 @@ main{
   margin-top: 14px;
   text-align: center;
   font-size: 15px;
+}
+.Description{
+  font-size: 13px!important;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: -5px;
+  /* height: 5px; */
+}
+
+.BenefitsOfTheProduct{
+  background: #bae2e2;
+}
+.differences{
+  background: #d5e9fa;
+}
+.HowTheProductWillSolveTheProblem{
+  background: #ffaa9f;
+}
+.clientDescription{
+  background: #ffe8da;
+}
+.problemsFromTheClient{
+  background: #a5affb;
+}
+.whatProblemIsBeingSolvedNow{
+  background: #e5e7fa;
+}
+.whatTasksTheClientSolves{
+  background: #ffc7a6;
+}
+
+/*  */
+/*  */
+/*  */
+/*  */
+
+.BenefitsOfTheProductAdd{
+  border: 2px dashed #bae2e2;
+  color: #bae2e2;
+}
+.differencesAdd{
+  border: 2px dashed #d5e9fa;
+  color: #d5e9fa;
+
+}
+.HowTheProductWillSolveTheProblemAdd{
+  border: 2px dashed #ffaa9f;
+  color: #ffaa9f;
+
+}
+.clientDescriptionAdd{
+  border: 2px dashed #ffe8da;
+  color: #ffe8da;
+
+}
+.problemsFromTheClientAdd{
+  border: 2px dashed #a5affb;
+  color: #a5affb;
+
+}
+.whatProblemIsBeingSolvedNowAdd{
+  border: 2px dashed #e5e7fa;
+  color: #e5e7fa;
+
+}
+.whatTasksTheClientSolvesAdd{
+  border: 2px dashed #ffc7a6;
+  color: #ffc7a6;
+
+}
+
+.del{
+  position: absolute;
+  width: 20px;
+  top: 5px;
+  left: 5px;
+  visibility: hidden;
+  opacity: 0;
 }
 </style>
