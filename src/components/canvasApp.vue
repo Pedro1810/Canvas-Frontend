@@ -15,7 +15,7 @@
               <p class="Description">В чем выгоды вашего продукта</p>
               <div v-for='elem in data[0].BenefitsOfTheProduct' class="block BenefitsOfTheProduct">
                 <img @click='del({"elem":elem,"arr":"BenefitsOfTheProduct"})' class='del' src="../assets/delete.png" alt="">
-                <p>{{elem.name}}</p>
+
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
               </div>
               <div @click='AddSticker("BenefitsOfTheProduct")' class="add BenefitsOfTheProductAdd">+</div>
@@ -562,9 +562,9 @@ main{
 
 .del{
   position: absolute;
-  width: 20px;
+  width: 15px;
   top: 5px;
-  left: 5px;
+  right: 5px;
   visibility: hidden;
   opacity: 0;
 }
