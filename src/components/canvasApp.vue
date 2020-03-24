@@ -15,6 +15,7 @@
               <p class="Description">В чем выгоды вашего продукта</p>
               <div v-for='elem in data[0].BenefitsOfTheProduct' class="block BenefitsOfTheProduct">
                 <img @click='del({"elem":elem,"arr":"BenefitsOfTheProduct"})' class='del' src="../assets/delete.png" alt="">
+                <p>{{elem.name}}</p>
 
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
               </div>
