@@ -1,11 +1,11 @@
 <template>
   <div class="canvas">
     <header>
-        <img src="../assets/Logo.svg" alt="За стеклом">
-        <button @click='SendToServer' type="btn" class='btn' name="button">Отправить идею</button>
+        <img src="../assets/Logo.svg" alt="logo">
+        <button @click='SendDataToTheServer' type="btn" class='btn' name="button">Отправить идею</button>
     </header>
     <main>
-      <input type="text" v-model="name" class='Maintitle'  name="" value="" placeholder="Введите название вашей идеи">
+      <input type="text" v-model="name" class='NameOfYourIdea'  name="" value="" placeholder="Введите название вашей идеи">
       <div class="Product">
         <p>ВАШ ПРОДУКТ</p>
         <div class="Products">
@@ -13,43 +13,45 @@
 
             <div class="left">
               <p class="Description">В чем выгоды вашего продукта</p>
-              <div v-for='elem in data.Products[0].BenefitsOfTheProduct' class="block BenefitsOfTheProduct">
-                <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
+              <div v-for='elem in data[0].BenefitsOfTheProduct' class="block BenefitsOfTheProduct">
+                <img @click='del({"elem":elem,"arr":"BenefitsOfTheProduct"})' class='del' src="../assets/delete.png" alt="">
                 <p>{{elem.name}}</p>
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
               </div>
-              <div @click='add("Products[0].BenefitsOfTheProduct")' class="add BenefitsOfTheProductAdd">+</div>
+              <div @click='AddSticker("BenefitsOfTheProduct")' class="add BenefitsOfTheProductAdd">+</div>
             </div>
 
             <div class="right">
               <p class="Description">Отличия от конкурентов</p>
-              <div v-for='elem in data.Products[0].differences' class="block differences">
-                <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
+              <div v-for='elem in data[0].differences' class="block differences">
+                <img @click='del({"elem":elem,"arr":"differences"})' class='del' src="../assets/delete.png" alt="">
 
                 <p>{{elem.name}}</p>
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
 
               </div>
-              <div @click='add("Products[0].differences")' class="add differencesAdd">+</div>
+              <div @click='AddSticker("differences")' class="add differencesAdd">+</div>
             </div>
         </div>
+
         <div class='notop'>
           <div class="center">
             <p class="Description">Как продукт решает проблему</p>
 
-            <div v-for='elem in data.Products[0].HowTheProductWillSolveTheProblem' class="blockC HowTheProductWillSolveTheProblem">
-              <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
+            <div v-for='elem in data[0].HowTheProductWillSolveTheProblem' class="blockC HowTheProductWillSolveTheProblem">
+              <img @click='del({"elem":elem,"arr":"HowTheProductWillSolveTheProblem"})' class='del' src="../assets/delete.png" alt="">
 
               <p>{{elem.name}}</p>
               <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
 
             </div>
-            <div @click='add("Products[0].HowTheProductWillSolveTheProblem")' class="addC HowTheProductWillSolveTheProblemAdd">+</div>
+            <div @click='AddSticker("HowTheProductWillSolveTheProblem")' class="addC HowTheProductWillSolveTheProblemAdd">+</div>
           </div>
         </div>
 
         </div>
       </div>
+
       <div class="Client">
         <p>ВАШ КЛИЕНТ</p>
         <div class="Clients">
@@ -58,51 +60,51 @@
             <div class="left">
               <p class="Description">Описание клиента</p>
 
-              <div v-for='elem in data.Clients[0].clientDescription' class="block clientDescription">
-                <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
+              <div v-for='elem in data[0].clientDescription' class="block clientDescription">
+                <img @click='del({"elem":elem,"arr":"clientDescription"})' class='del' src="../assets/delete.png" alt="">
 
                 <p>{{elem.name}}</p>
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
 
               </div>
-              <div @click='add("Clients[0].clientDescription")' class="add clientDescriptionAdd">+</div>
+              <div @click='AddSticker("clientDescription")' class="add clientDescriptionAdd">+</div>
             </div>
 
             <div class="right">
               <p class="Description">Какие проблемы возникают у клиента</p>
-              <div v-for='elem in data.Clients[0].problemsFromTheClient' class="block problemsFromTheClient">
-                <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
+              <div v-for='elem in data[0].problemsFromTheClient' class="block problemsFromTheClient">
+                <img @click='del({"elem":elem,"arr":"problemsFromTheClient"})' class='del' src="../assets/delete.png" alt="">
 
                 <p>{{elem.name}}</p>
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
 
               </div>
-              <div @click='add("Clients[0].problemsFromTheClient")' class="add problemsFromTheClientAdd">+</div>
+              <div @click='AddSticker("problemsFromTheClient")' class="add problemsFromTheClientAdd">+</div>
             </div>
           </div>
           <div class='notop'>
             <div class="left">
               <p class="Description">Как проблема решается сейчас</p>
-              <div v-for='elem in data.Clients[0].whatProblemIsBeingSolvedNow' class="block whatProblemIsBeingSolvedNow">
-                <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
+              <div v-for='elem in data[0].whatProblemIsBeingSolvedNow' class="block whatProblemIsBeingSolvedNow">
+                <img @click='del({"elem":elem,"arr":"whatProblemIsBeingSolvedNow"})' class='del' src="../assets/delete.png" alt="">
 
                 <p>{{elem.name}}</p>
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
 
               </div>
-              <div @click='add("Clients[0].whatProblemIsBeingSolvedNow")' class="add whatProblemIsBeingSolvedNowAdd">+</div>
+              <div @click='AddSticker("whatProblemIsBeingSolvedNow")' class="add whatProblemIsBeingSolvedNowAdd">+</div>
             </div>
 
             <div class="right">
               <p class="Description">Какие задачи решает клиент</p>
-              <div v-for='elem in data.Clients[0].whatTasksTheClientSolves' class="block whatTasksTheClientSolves">
-                <img @click='del(elem)' class='del' src="../assets/delete.png" alt="">
+              <div v-for='elem in data[0].whatTasksTheClientSolves' class="block whatTasksTheClientSolves">
+                <img @click='del({"elem":elem,"arr":"whatTasksTheClientSolves"})' class='del' src="../assets/delete.png" alt="">
 
                 <p>{{elem.name}}</p>
                 <p>{{elem.Description.length > 0 ? '...' : '' }}</p>
 
               </div>
-              <div @click='add("Clients[0].whatTasksTheClientSolves")' class="add whatTasksTheClientSolvesAdd">+</div>
+              <div @click='AddSticker("whatTasksTheClientSolves")' class="add whatTasksTheClientSolvesAdd">+</div>
             </div>
           </div>
         </div>
@@ -129,7 +131,7 @@
 </template>
 
 <script>
-import $ from "jquery"
+import $ from "jquery";
 import swal from 'sweetalert';
 
 
@@ -141,21 +143,15 @@ export default {
   },
   data(){
     return{
-      data: {
-        "Products":
-           [{
+      data: [{
               "BenefitsOfTheProduct": [],
               "differences": [],
-              "HowTheProductWillSolveTheProblem": []
+              "HowTheProductWillSolveTheProblem": [],
+              "clientDescription":[],
+              "problemsFromTheClient":[],
+              "whatProblemIsBeingSolvedNow":[],
+              "whatTasksTheClientSolves":[]
             }],
-        "Clients":
-            [{
-                "clientDescription":[],
-                "problemsFromTheClient":[],
-                "whatProblemIsBeingSolvedNow":[],
-                "whatTasksTheClientSolves":[]
-            }]
-        },
 
         isVisible: false,
         title: '',
@@ -168,15 +164,25 @@ export default {
 
   methods: {
     del(elem){
-      console.log(elem);
+      // console.log(elem);
 
-      arr.splice(elem.name);
+      // console.log(this.data[0][elem.arr]);
+      // console.log(elem.elem);
 
-      this.data = arr;
+      // console.log(this.data[0][elem.arr].includes(elem.elem))
 
+      for (var i = 0; i < this.data[0][elem.arr].length; i++) {
+        console.log(JSON.stringify(this.data[0][elem.arr][i].Description));
+        console.log(JSON.stringify(this.data[0][elem.arr][i].Name));
+        console.log(JSON.stringify(elem.elem['Name']));
+        if (JSON.stringify(this.data[0][elem.arr][i].Name) == elem.elem.Name && JSON.stringify(this.data[0][elem.arr][i].Description) == elem.elem.Description) {
+          console.log('eeee');
+        }
+        // console.log(this.data[0][elem.arr][i].Description);
+      }
 
     },
-    SendToServer(){
+    SendDataToTheServer(){
       let vm = this;
 
         $.ajax({
@@ -204,37 +210,42 @@ export default {
       });
     },
     SaveSticer(){
-      let param = this.data[this.RoutInS.split('[')[0]][0][this.RoutInS.split('.')[1]]
+
+
+      let param = this.data[0][this.RoutInS]
+
+      console.log(param);
+
       param.push({'Description': this.DescriptionSticker, 'name': this.ThemeSticker})
       this.isVisible = false;
       this.DescriptionSticker = '';
       this.ThemeSticker = '';
-      // param.push("Description": this.DescriptionSticker, "name": this.ThemeSticker);
     },
     VisibleFalse(){
       this.isVisible = false;
     },
-    add(data){
+    AddSticker(data){
       this.RoutInS = data;
-      if (data.split('.')[1] == 'BenefitsOfTheProduct') {
+      console.log(data);
+      if (data == 'BenefitsOfTheProduct') {
         this.title = 'В чем выгоды вашего продукта'
       }
-      else if (data.split('.')[1] == 'differences') {
+      else if (data == 'differences') {
         this.title = 'Отличия от конкурентов'
       }
-      else if (data.split('.')[1] == 'HowTheProductWillSolveTheProblem') {
+      else if (data == 'HowTheProductWillSolveTheProblem') {
         this.title = 'Как продукт решает проблему'
       }
-      else if (data.split('.')[1] == 'clientDescription') {
+      else if (data == 'clientDescription') {
         this.title = 'Описание клиента'
       }
-      else if (data.split('.')[1] == 'problemsFromTheClient') {
+      else if (data == 'problemsFromTheClient') {
         this.title = 'Какие проблемы возникают у клиента'
       }
-      else if (data.split('.')[1] == 'whatProblemIsBeingSolvedNow') {
+      else if (data == 'whatProblemIsBeingSolvedNow') {
         this.title = 'Как проблема решается сейчас'
       }
-      else if (data.split('.')[1] == 'whatTasksTheClientSolves') {
+      else if (data == 'whatTasksTheClientSolves') {
         this.title = 'Какие задачи решает клиент'
       }
       this.isVisible = !this.isVisible
@@ -467,7 +478,7 @@ main{
   resize: none;
 
 }
-.Maintitle{
+.NameOfYourIdea{
   position: absolute;
   width: 300px;
   height: 40px;
